@@ -46,24 +46,15 @@ public class YoLoV5 {
                 .builder()
                 .setPipeline(pipeline)
                 //labels信息定义
-                .optSynset(Arrays.asList("person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
-                        "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
-                        "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
-                        "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",
-                        "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple",
-                        "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch",
-                        "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
-                        "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
-                        "hair drier", "toothbrush"))
-
+                .optSynset(Arrays.asList("HeartBreak", "octoberTreat", "PiercingSound", "baobao", "PeaceTreaty", "chuchangshunxu","binsizhuangtai","kapaijinyong","SurgarRush","Singlecombat","duimiankapai","CarrotHammer","kapajinyongSurgarRush","wofangshengyukapai","GasUnleash","IvoryStab","siwangzhuangtai","nengliangshumu","All-outshot","Surpriseinvasion","Insectivore","Endturn"))
                 //预测的最小下限
-                .optThreshold(0.5f)
+                .optThreshold(0.3f)
                 .build();
 
         //构建Model Criteria
         Criteria<Image, DetectedObjects> criteria = Criteria.builder()
                 .setTypes(Image.class, DetectedObjects.class)//图片目标检测类型
-                .optModelUrls("file:./models/yolov5s.torchscript.pt")//模型的路径
+                .optModelUrls("file:./models/best.torchscript.pt")//模型的路径
                 .optTranslator(translator)//设置Translator
                 .optProgress(new ProgressBar())//展示加载进度
                 .build();
@@ -89,7 +80,7 @@ public class YoLoV5 {
         ImageUtils.drawBoundingBoxes(imageSize,(BufferedImage) img.getWrappedImage(),results);
         //保存文件名称
         Path imagePath = outputDir.resolve("yolov5.png");
-        // OpenJDK can't save jpg with alpha channel
+        // OpenJDK can"t save jpg with alpha channel
         img.save(Files.newOutputStream(imagePath), "png");
         log.info("Detected objects image has been saved in: {}", imagePath);
     }

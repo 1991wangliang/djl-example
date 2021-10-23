@@ -35,7 +35,7 @@ public class ImageUtils {
 
         for (int i=0;i<list.size();i++) {
             DetectedObjects.DetectedObject result = list.get(i);
-            String className = String.format("%s",result.getClassName());
+            String className = String.format("%s,%.2f",result.getClassName(),result.getProbability());
             BoundingBox box = result.getBoundingBox();
             g.setPaint(randomColor().darker());
 

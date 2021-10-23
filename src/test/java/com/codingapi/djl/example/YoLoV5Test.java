@@ -11,6 +11,6 @@ class YoLoV5Test {
     @Test
     void predict() throws Exception{
         YoLoV5 yolo = new YoLoV5();
-        yolo.predict("images/test.jpeg");
+        yolo.predict("images/img.png");
     }
 }
